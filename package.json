@@ -1,6 +1,6 @@
 {
   "name": "node-svg2android",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A PhantomJS wrapper around svg2android for node consumption",
   "main": "index.js",
   "scripts": {
