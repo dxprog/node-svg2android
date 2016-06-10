@@ -1,0 +1,26 @@
+{
+  "name": "node-svg2android",
+  "version": "1.0.0",
+  "description": "A PhantomJS wrapper around svg2android for node consumption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dxprog/node-svg2android.git"
+  },
+  "author": "Matt Hackmann",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dxprog/svg2android/issues"
+  },
+  "engines": {
+    "node": ">= 4.0.0"
+  },
+  "homepage": "https://github.com/dxprog/svg2android#readme",
+  "dependencies": {
+    "md5": "^2.1.0",
+    "phantom": "^2.1.3"
+  }
+}
