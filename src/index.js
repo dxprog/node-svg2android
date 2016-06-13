@@ -100,7 +100,7 @@ module.exports = class SvgToAndroid {
         if (err) {
           reject({ exc: err });
         } else {
-          let id = md5(data);
+          var id = md5(data);
           this.callbacks[id] = (result) => {
             if (!result.exc) {
               resolve(result);
