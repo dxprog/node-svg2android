@@ -100,15 +100,15 @@ module.exports = class SvgToAndroid {
         if (err) {
           reject({ exc: err });
         } else {
-          this.page.evaluate(convert, data.toString(), md5(data)).then((conversionId) => {
-            this.callbacks[conversionId] = (result) => {
-              if (!result.exc) {
-                resolve(result);
-              } else {
-                reject(result.exc);
-              }
-            };
-          });
+          var id = md5(data);
+          this.callbacks[id] = (result) => {
+            if (!result.exc) {
+              resolve(result);
+            } else {
+              reject(result.exc);
+            }
+          };
+          this.page.evaluate(convert, data.toString(), id);
         }
       });
     });
