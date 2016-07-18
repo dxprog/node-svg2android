@@ -82,6 +82,16 @@ module.exports = class SvgToAndroid {
   }
 
   /**
+   * Sanitize the SVG file to prepare for conversion to Android Vector Drawable format.
+   * Remove the references to currentColor
+   *
+   * @private
+   */
+   sanitizeSvgBeforeAvdConversion(data) {
+     return data.split('currentColor').join('#000000');
+  }
+
+  /**
    * Invokes the converter
    *
    * @param {String} filePath The path to the SVG file
@@ -100,15 +110,20 @@ module.exports = class SvgToAndroid {
         if (err) {
           reject({ exc: err });
         } else {
+          data = this.sanitizeSvgBeforeAvdConversion(data.toString());
           var id = md5(data);
           this.callbacks[id] = (result) => {
-            if (!result.exc) {
+            // Reject the promise if there are warnings during conversion
+            // Examples are if the SVG has gradients or transforms which are not supported in AVD
+            if (result.warnings) {
+              reject(result.warnings);
+            } else if (!result.exc) {
               resolve(result);
             } else {
               reject(result.exc);
             }
           };
-          this.page.evaluate(convert, data.toString(), id);
+          this.page.evaluate(convert, data, id);
         }
       });
     });
